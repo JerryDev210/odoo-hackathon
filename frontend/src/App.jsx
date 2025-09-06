@@ -8,6 +8,7 @@ import UserProfile from "./pages/UserProfile";
 import MyListings from "./pages/MyListings";
 import MyPurchases from "./pages/MyPurchases";
 import Search from "./pages/Search";
+import Addproducts from "./pages/Addproducts";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/my-listings" element={<MyListings />} />
         <Route path="/my-purchases" element={<MyPurchases />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/addproducts" element={<Addproducts/>}/>
       </Routes>
     </Router>
   );
