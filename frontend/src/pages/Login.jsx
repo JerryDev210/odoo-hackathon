@@ -42,7 +42,7 @@ const Login = () => {
         <div className="header-content">
           <h2>Welcome Back</h2>
           <p className="subtitle">
-            🌿 Join our sustainable marketplace community
+            🌿 Join our sustainable marketplace ecosystem
           </p>
         </div>
         {error && <div className="error-message">{error}</div>}

@@ -50,22 +50,10 @@
   margin-bottom: 32px;
   color: #2C3E50;
   font-family: 'Poppins', sans-serif;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
   position: relative;
-}
-
-.login-card h2::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 3px;
-  border-radius: 2px;
 }
 
 .login-card input {
