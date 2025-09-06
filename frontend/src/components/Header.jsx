@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/authService';
+import { cartService } from '../services/cartService';
 import './Header.css';
 
 const Header = () => {
@@ -8,6 +9,7 @@ const Header = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [user, setUser] = useState(authService.getCurrentUser());
     const [isMobile, setIsMobile] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
 
     // Check if mobile on mount and resize
     useEffect(() => {
@@ -45,6 +47,35 @@ const Header = () => {
         
         return () => window.removeEventListener('authChange', handleAuthChange);
     }, []);
+
+    // Load cart count
+    useEffect(() => {
+        loadCartCount();
+        
+        // Listen for cart updates
+        const handleCartUpdate = () => {
+            loadCartCount();
+        };
+        
+        window.addEventListener('cartUpdated', handleCartUpdate);
+        
+        return () => window.removeEventListener('cartUpdated', handleCartUpdate);
+    }, [user]);
+
+    const loadCartCount = async () => {
+        if (!user) {
+            setCartCount(0);
+            return;
+        }
+        
+        try {
+            const response = await cartService.getCartCount();
+            setCartCount(response.count || 0);
+        } catch (error) {
+            // Silently handle error - cart count will remain 0
+            setCartCount(0);
+        }
+    };
 
     const toggleNav = () => {
         setIsNavOpen(!isNavOpen);
@@ -126,9 +157,11 @@ const Header = () => {
                     </nav>
                     
                     <div className="header-right">
-                        <button className="cart-btn">
+                        <button className="cart-btn" onClick={() => navigate('/cart')}>
                             <span className="cart-icon">🛒</span>
-                            <span className="cart-count">0</span>
+                            {cartCount > 0 && (
+                                <span className="cart-count">{cartCount}</span>
+                            )}
                         </button>
                         {user ? (
                             <button className="profile-btn" onClick={() => navigate('/profile')}>
