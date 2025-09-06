@@ -115,20 +115,25 @@ const Header = () => {
                     <nav className={`menu-bar ${isNavOpen ? 'open' : ''}`}>
                         <ul>
                             {[
+                                { id: 'search', text: 'Search', path: '/search', alwaysShow: true },
                                 { id: 'about', text: 'About', alwaysShow: true },
                                 { id: 'contact', text: 'Contact', alwaysShow: true },
-                                { id: 'mylist', text: 'My List', requiresAuth: true },
+                                { id: 'my-listings', text: 'My Listings', path: '/my-listings', requiresAuth: true },
+                                { id: 'my-purchases', text: 'My Purchases', path: '/my-purchases', requiresAuth: true },
                                 { id: 'addproducts', text: 'Add Products', requiresAuth: true },
                                 { id: 'logout', text: 'Logout', requiresAuth: true, onClick: handleLogout }
                             ].filter(item => item.alwaysShow || (user && item.requiresAuth))
                               .map(item => (
                                 <li key={item.id}>
                                     <a 
-                                        href={item.onClick ? '#' : `/${item.id}`} 
+                                        href={item.onClick ? '#' : (item.path || `/${item.id}`)} 
                                         onClick={(e) => {
                                             if (item.onClick) {
                                                 e.preventDefault();
                                                 item.onClick();
+                                            } else if (item.path) {
+                                                e.preventDefault();
+                                                navigate(item.path);
                                             }
                                             toggleNav();
                                         }}

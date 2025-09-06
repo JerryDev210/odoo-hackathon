@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authService, productService, userService  } from '../services';
 import './UserProfile.css';
 import Header from '../components/Header';
 
 const UserProfile = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -505,7 +507,12 @@ const UserProfile = () => {
                 
                 <div className="navigation-grid">
                   {navigationItems.map((item, index) => (
-                    <div key={index} className="nav-item">
+                    <div 
+                      key={index} 
+                      className="nav-item"
+                      onClick={() => navigate(item.path)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       <div className="nav-content">
                         <div className="nav-header">
                           <span className="nav-icon">{item.icon}</span>
