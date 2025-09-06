@@ -1,26 +1,45 @@
+/* EcoVibe Theme - Global Styles */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* EcoVibe Color Palette */
+  --eco-green: #27AE60;
+  --mint-green: #A8E6CF;
+  --pure-white: #FFFFFF;
+  --charcoal-black: #2C3E50;
+  --soft-gray: #ECF0F1;
+  --light-gray: #7F8C8D;
+  --accent-gray: #95A5A6;
+  
+  /* Typography */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  /* Light theme by default */
+  /* Theme colors */
   color-scheme: light;
-  color: #213547;
-  background-color: #ffffff;
+  color: var(--charcoal-black);
+  background-color: var(--pure-white);
 
+  /* Font rendering */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--eco-green);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #229954;
+  text-decoration: underline;
 }
 
 body {
@@ -29,6 +48,14 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--pure-white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--charcoal-black);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 h1 {
@@ -36,35 +63,99 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #f9f9f9;
-  color: #213547;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+p {
+  color: var(--light-gray);
+  line-height: 1.6;
 }
 
+button {
+  border-radius: 12px;
+  border: 2px solid transparent;
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--eco-green);
+  color: var(--pure-white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+button:hover {
+  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--mint-green);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  background-color: var(--soft-gray);
+  color: var(--accent-gray);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Form elements */
+input, textarea, select {
+  font-family: 'Inter', sans-serif;
+  color: var(--charcoal-black);
+  border: 2px solid var(--soft-gray);
+  border-radius: 8px;
+  padding: 12px 16px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--eco-green);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--soft-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mint-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--eco-green);
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--mint-green);
+  color: var(--charcoal-black);
+}
+
+/* Light theme specifics */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--charcoal-black);
+    background-color: var(--pure-white);
   }
+  
   a:hover {
-    color: #747bff;
+    color: #229954;
   }
+  
   button {
-    background-color: #f9f9f9;
+    background-color: var(--eco-green);
+    color: var(--pure-white);
   }
 }

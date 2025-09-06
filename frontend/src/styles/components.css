@@ -1,0 +1,320 @@
+/* EcoVibe Global Component Styles */
+/* Import this file in components that need consistent EcoVibe styling */
+
+/* Utility Classes */
+.eco-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.eco-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(39, 174, 96, 0.08);
+  border: 1px solid rgba(168, 230, 207, 0.3);
+  transition: all 0.3s ease;
+}
+
+.eco-card:hover {
+  box-shadow: 0 12px 40px rgba(39, 174, 96, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Button Styles */
+.eco-btn {
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.eco-btn-primary {
+  background: linear-gradient(135deg, #27AE60, #2ECC71);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(39, 174, 96, 0.2);
+}
+
+.eco-btn-primary:hover {
+  background: linear-gradient(135deg, #229954, #27AE60);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.3);
+  transform: translateY(-2px);
+}
+
+.eco-btn-secondary {
+  background: transparent;
+  color: #27AE60;
+  border: 2px solid #27AE60;
+}
+
+.eco-btn-secondary:hover {
+  background: #27AE60;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.2);
+}
+
+.eco-btn:disabled {
+  background: #ECF0F1;
+  color: #95A5A6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Input Styles */
+.eco-input {
+  width: 100%;
+  padding: 16px 20px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: 2px solid #ECF0F1;
+  background: #FFFFFF;
+  color: #2C3E50;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.eco-input::placeholder {
+  color: #95A5A6;
+  font-weight: 400;
+}
+
+.eco-input:focus {
+  border-color: #27AE60;
+  box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
+}
+
+.eco-input:hover {
+  border-color: #A8E6CF;
+}
+
+.eco-input.error {
+  border-color: #E74C3C;
+  box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1);
+}
+
+/* Typography */
+.eco-heading {
+  font-family: 'Poppins', sans-serif;
+  color: #2C3E50;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.eco-heading-1 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.eco-heading-2 {
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.eco-heading-3 {
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.eco-text {
+  font-family: 'Inter', sans-serif;
+  color: #7F8C8D;
+  line-height: 1.6;
+}
+
+.eco-text-primary {
+  color: #2C3E50;
+}
+
+.eco-text-secondary {
+  color: #7F8C8D;
+}
+
+.eco-text-muted {
+  color: #95A5A6;
+}
+
+/* Layout */
+.eco-flex {
+  display: flex;
+}
+
+.eco-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eco-flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.eco-grid {
+  display: grid;
+}
+
+.eco-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.eco-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.eco-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Spacing */
+.eco-mt-sm { margin-top: 8px; }
+.eco-mt-md { margin-top: 16px; }
+.eco-mt-lg { margin-top: 24px; }
+.eco-mt-xl { margin-top: 32px; }
+
+.eco-mb-sm { margin-bottom: 8px; }
+.eco-mb-md { margin-bottom: 16px; }
+.eco-mb-lg { margin-bottom: 24px; }
+.eco-mb-xl { margin-bottom: 32px; }
+
+.eco-p-sm { padding: 8px; }
+.eco-p-md { padding: 16px; }
+.eco-p-lg { padding: 24px; }
+.eco-p-xl { padding: 32px; }
+
+/* Status Messages */
+.eco-alert {
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eco-alert-success {
+  background: linear-gradient(135deg, #A8E6CF, #D5F5E3);
+  color: #27AE60;
+  border: 1px solid #A8E6CF;
+}
+
+.eco-alert-error {
+  background: linear-gradient(135deg, #FFE6E6, #FFF0F0);
+  color: #E74C3C;
+  border: 1px solid #F5C6C6;
+}
+
+.eco-alert-warning {
+  background: linear-gradient(135deg, #FFF3CD, #FFFACD);
+  color: #F39C12;
+  border: 1px solid #F39C12;
+}
+
+.eco-alert-info {
+  background: linear-gradient(135deg, #D1ECF1, #E8F4FD);
+  color: #3498DB;
+  border: 1px solid #3498DB;
+}
+
+/* Loading States */
+.eco-loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ECF0F1;
+  border-radius: 50%;
+  border-top-color: #27AE60;
+  animation: eco-spin 1s ease-in-out infinite;
+}
+
+@keyframes eco-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Shimmer Effect */
+.eco-shimmer {
+  background: linear-gradient(90deg, #ECF0F1 25%, #F8F9FA 50%, #ECF0F1 75%);
+  background-size: 200% 100%;
+  animation: eco-shimmer 2s infinite;
+}
+
+@keyframes eco-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Hover Effects */
+.eco-hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.eco-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(39, 174, 96, 0.15);
+}
+
+/* Focus States */
+.eco-focus {
+  outline: 2px solid #A8E6CF;
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .eco-grid-2,
+  .eco-grid-3,
+  .eco-grid-4 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .eco-card {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+  
+  .eco-heading-1 { font-size: 28px; }
+  .eco-heading-2 { font-size: 24px; }
+  .eco-heading-3 { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  .eco-container {
+    padding: 0 16px;
+  }
+  
+  .eco-card {
+    padding: 20px 16px;
+  }
+  
+  .eco-btn {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+  
+  .eco-input {
+    padding: 14px 16px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}

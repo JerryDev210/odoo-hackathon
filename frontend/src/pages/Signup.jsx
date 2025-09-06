@@ -55,13 +55,16 @@ const SignUp = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <img src={logo} alt="App Logo" className="logo" />
-        <h2>Sign Up</h2>
+        <img src={logo} alt="EcoVibe Logo" className="logo" />
+        <h2>Join EcoFinds</h2>
+        <p style={{ color: '#7F8C8D', fontSize: '14px', marginBottom: '24px', marginTop: '-16px' }}>
+          🌱 Start your sustainable shopping journey today
+        </p>
         {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSignUp}>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Choose a username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -69,7 +72,7 @@ const SignUp = () => {
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Enter your email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -77,7 +80,7 @@ const SignUp = () => {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Create a secure password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -86,7 +89,7 @@ const SignUp = () => {
           />
           <input
             type="password"
-            placeholder="Confirm Password"
+            placeholder="Confirm your password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
@@ -94,13 +97,13 @@ const SignUp = () => {
             minLength="6"
           />
           <button type="submit" className="login-btn" disabled={loading}>
-            {loading ? "Creating Account..." : "Sign Up"}
+            {loading ? "Creating your account..." : "Join the Movement"}
           </button>
         </form>
         <p>
-          Already have an account?{" "}
+          Already part of EcoFinds?{" "}
           <span className="signup-link" onClick={handleLoginRedirect}>
-            Login
+            Sign in here
           </span>
         </p>
       </div>

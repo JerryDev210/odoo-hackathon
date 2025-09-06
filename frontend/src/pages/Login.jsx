@@ -36,36 +36,53 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <img src={logo} alt="App Logo" className="logo" />
-        <h2>Login</h2>
+        <div className="logo-container">
+          <img src={logo} alt="EcoVibe Logo" className="logo" />
+        </div>
+        <div className="header-content">
+          <h2>Welcome Back</h2>
+          <p className="subtitle">
+            🌿 Join our sustainable marketplace community
+          </p>
+        </div>
         {error && <div className="error-message">{error}</div>}
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            disabled={loading}
-          />
-          <button type="submit" className="login-btn" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="input-group">
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+              className="form-input"
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              disabled={loading}
+              className="form-input"
+            />
+          </div>
+          <div className="button-group">
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? "Signing you in..." : "Sign In"}
+            </button>
+          </div>
         </form>
-        <p>
-          Don't have an account?{" "}
-          <span className="signup-link" onClick={handleSignUpRedirect}>
-            Sign Up
-          </span>
-        </p>
+        <div className="footer-content">
+          <p>
+            New to EcoFinds?{" "}
+            <span className="signup-link" onClick={handleSignUpRedirect}>
+              Join the movement
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
