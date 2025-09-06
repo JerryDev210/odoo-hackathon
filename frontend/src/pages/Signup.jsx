@@ -39,7 +39,7 @@ const SignUp = () => {
       const response = await authService.register(userData);
       console.log("Registration successful:", response);
       alert("Account created successfully!");
-      navigate("/login"); // Redirect to login after successful signup
+      navigate("/"); // Redirect to home page after successful signup
     } catch (error) {
       console.error("Registration error:", error);
       setError(error.message || "Registration failed. Please try again.");
