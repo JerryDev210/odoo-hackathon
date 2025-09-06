@@ -36,6 +36,19 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 });
 
+// Get cart count only
+router.get('/count', authMiddleware, async (req, res) => {
+  try {
+    const cartItemCount = await prisma.cartItem.count({
+      where: { userId: req.user.id }
+    });
+
+    res.json({ count: cartItemCount });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Add item to cart
 router.post('/', authMiddleware, validateRequest(cartItemSchema), async (req, res) => {
   try {

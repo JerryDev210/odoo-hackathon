@@ -37,23 +37,32 @@ router.get('/:id', async (req, res) => {
 router.post('/', 
   authMiddleware, 
   upload.array('images', 5), // Support multiple images
-  validateRequest(productSchema), 
   async (req, res) => {
     try {
-      const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
-      
-      const productData = {
+      // Convert and prepare data before validation
+      const convertedBody = {
         ...req.body,
         price: parseFloat(req.body.price),
         categoryId: parseInt(req.body.categoryId),
         quantity: req.body.quantity ? parseInt(req.body.quantity) : 1,
         yearOfManufacture: req.body.yearOfManufacture ? parseInt(req.body.yearOfManufacture) : null,
-        length: req.body.length ? parseFloat(req.body.length) : null,
-        width: req.body.width ? parseFloat(req.body.width) : null,
-        height: req.body.height ? parseFloat(req.body.height) : null,
         weight: req.body.weight ? parseFloat(req.body.weight) : null,
         originalPackaging: req.body.originalPackaging === 'true',
         manualIncluded: req.body.manualIncluded === 'true',
+      };
+
+      // Validate the converted data
+      const { error } = productSchema.validate(convertedBody);
+      if (error) {
+        return res.status(400).json({ 
+          error: error.details[0].message 
+        });
+      }
+
+      const images = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+      
+      const productData = {
+        ...convertedBody,
         images
       };
 
