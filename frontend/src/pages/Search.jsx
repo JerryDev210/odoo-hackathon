@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { productService, categoryService } from '../services';
+import { productService, categoryService, cartService, authService } from '../services';
 import Header from '../components/Header';
 import './ProductPages.css';
 
@@ -19,6 +19,10 @@ const Search = () => {
   
   // Filtered and processed products
   const [filteredProducts, setFilteredProducts] = useState([]);
+  
+  // Cart states
+  const [addingToCart, setAddingToCart] = useState({});
+  const [cartSuccess, setCartSuccess] = useState({});
 
   useEffect(() => {
     fetchInitialData();
@@ -178,6 +182,84 @@ const Search = () => {
   const hasActiveFilters = () => {
     return searchTerm || filterBy !== 'all' || categoryFilter !== 'all' || 
            priceRange.min || priceRange.max || groupBy !== 'none';
+  };
+
+  // Cart functions
+  const handleAddToCart = async (product) => {
+    console.log('🔥 Button clicked for product:', product.id, product.title);
+    alert('Button click detected! Product: ' + product.title);
+    
+    try {
+      console.log('Adding to cart:', product.id, product.title);
+      
+      // Check if user is authenticated
+      if (!authService.isAuthenticated()) {
+        alert('Please log in to add items to cart');
+        return;
+      }
+
+      // Check if user owns this product
+      const currentUser = authService.getCurrentUser();
+      if (currentUser && product.userId === currentUser.id) {
+        alert('You cannot add your own product to cart');
+        return;
+      }
+
+      // Set loading state for this specific product
+      setAddingToCart(prev => ({ ...prev, [product.id]: true }));
+
+      console.log('Calling cartService.addToCart with productId:', product.id);
+      
+      // Add to cart
+      const result = await cartService.addToCart(product.id, 1);
+      
+      console.log('Cart service response:', result);
+
+      // Show success state
+      setCartSuccess(prev => ({ ...prev, [product.id]: true }));
+      
+      // Clear success state after 2 seconds
+      setTimeout(() => {
+        setCartSuccess(prev => ({ ...prev, [product.id]: false }));
+      }, 2000);
+
+    } catch (err) {
+      console.error('Error adding to cart:', err);
+      console.error('Error details:', err.response?.data || err.message);
+      
+      let errorMessage = 'Failed to add item to cart';
+      if (err.response?.data?.error) {
+        errorMessage = err.response.data.error;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      alert(errorMessage);
+    } finally {
+      setAddingToCart(prev => ({ ...prev, [product.id]: false }));
+    }
+  };
+
+  const handleViewDetails = (product) => {
+    // Navigate to product details page
+    // For now, just console log
+    console.log('View details for product:', product);
+    alert(`Product: ${product.title}\nPrice: $${product.price}\nDescription: ${product.description}`);
+  };
+
+  const handleAddToWishlist = async (product) => {
+    try {
+      if (!authService.isAuthenticated()) {
+        alert('Please log in to add items to wishlist');
+        return;
+      }
+      
+      // TODO: Implement wishlist functionality
+      alert('Wishlist functionality coming soon!');
+    } catch (err) {
+      console.error('Error adding to wishlist:', err);
+      alert('Failed to add to wishlist');
+    }
   };
 
   if (loading) {
@@ -382,10 +464,10 @@ const Search = () => {
                         </div>
                         
                         <div className="product-metadata">
-                          {product.category && (
+                          {product.category?.name && (
                             <span className="product-category">{product.category.name}</span>
                           )}
-                          {product.user && (
+                          {(product.user?.fullName || product.user?.username) && (
                             <span className="product-seller">
                               by {product.user.fullName || product.user.username}
                             </span>
@@ -399,11 +481,33 @@ const Search = () => {
                         </div>
                         
                         <div className="product-actions">
-                          <button className="view-button">View Details</button>
+                          <button 
+                            className="view-button"
+                            onClick={() => handleViewDetails(product)}
+                          >
+                            View Details
+                          </button>
                           {product.quantity > 0 ? (
-                            <button className="add-to-cart-button">Add to Cart</button>
+                            <button 
+                              className={`add-to-cart-button ${cartSuccess[product.id] ? 'success' : ''}`}
+                              onClick={() => handleAddToCart(product)}
+                            //   disabled={addingToCart[product.id]}
+                            >
+                              {addingToCart[product.id] ? (
+                                '⏳ Adding...'
+                              ) : cartSuccess[product.id] ? (
+                                '✓ Added!'
+                              ) : (
+                                '🛒 Add to Cart'
+                              )}
+                            </button>
                           ) : (
-                            <button className="wishlist-button">Add to Wishlist</button>
+                            <button 
+                              className="wishlist-button"
+                              onClick={() => handleAddToWishlist(product)}
+                            >
+                              💝 Add to Wishlist
+                            </button>
                           )}
                         </div>
                       </div>

@@ -186,7 +186,7 @@ const Cart = () => {
                                         <p className="item-description">{item.product.description}</p>
                                         <div className="item-meta">
                                             <span className="item-category">
-                                                Category: {item.product.category}
+                                                Category: {item.product.category?.name || 'Uncategorized'}
                                             </span>
                                             <span className="item-price">
                                                 ${item.product.price.toFixed(2)} each
