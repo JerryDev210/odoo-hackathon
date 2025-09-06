@@ -69,6 +69,23 @@ export const authService = {
     }
   },
 
+  // Upload profile picture
+  uploadProfilePicture: async (formData) => {
+    try {
+      const response = await api.post('/users/profile/picture', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      if (response.data.user) {
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      }
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
   // Get token
   getToken: () => {
     return localStorage.getItem('token');
