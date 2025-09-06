@@ -19,8 +19,12 @@ const Login = () => {
     try {
       const response = await authService.login(email, password);
       console.log("Login successful:", response);
+      
+      // Dispatch custom event to notify Header component
+      window.dispatchEvent(new CustomEvent('authChange'));
+      
       alert("Logged in successfully!");
-      // navigate("/dashboard"); // Redirect after login
+      navigate("/"); // Redirect to home page after successful login
     } catch (error) {
       console.error("Login error:", error);
       setError(error.message || "Login failed. Please try again.");
